@@ -1,5 +1,7 @@
 package com.database.demo.pojo;
 
+import java.util.Set;
+
 import javax.persistence.*;
 
 @Entity
@@ -10,6 +12,11 @@ public class Branch {
 	@ManyToOne
 	@JoinColumn(name="bankid")
 	private Bank bank;
+	@OneToMany(mappedBy="branch",fetch=FetchType.EAGER)
+	private Set<LoanType> loantype;
+	@OneToOne(mappedBy="branch")
+	private Manager manager;
+	
 	
 	private String branchname;
 	private String branchaddress;
@@ -44,6 +51,19 @@ public class Branch {
 	public void setIfsccode(String ifsccode) {
 		this.ifsccode = ifsccode;
 	}
+	public Set<LoanType> getLoantype() {
+		return loantype;
+	}
+	public void setLoantype(Set<LoanType> loantype) {
+		this.loantype = loantype;
+	}
+	public Manager getManager() {
+		return manager;
+	}
+	public void setManager(Manager manager) {
+		this.manager = manager;
+	}
+	
 	
 
 
