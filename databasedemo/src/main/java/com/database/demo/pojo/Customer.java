@@ -8,6 +8,7 @@ import javax.persistence.*;
 @Entity
 public class Customer {
 	@Id
+	@GeneratedValue
 	private Long customerid;
 	
 	
@@ -27,6 +28,30 @@ public class Customer {
 	private String address;
 	private Date birthdate;
 	private String gender;
+     
+	
+        public Customer() {
+		
+	}
+        
+
+	public Customer(Long customerid, Set<LoanApplication> loanapplication, Manager manager, String firstname,
+				String lastname, Long mobileno, String email, String password, String address, Date birthdate,
+				String gender) {
+			super();
+			this.customerid = customerid;
+			this.loanapplication = loanapplication;
+			this.manager = manager;
+			this.firstname = firstname;
+			this.lastname = lastname;
+			this.mobileno = mobileno;
+			this.email = email;
+			this.password = password;
+			this.address = address;
+			this.birthdate = birthdate;
+			this.gender = gender;
+		}
+
 
 	public Long getCustomerid() {
 		return customerid;
@@ -114,6 +139,14 @@ public class Customer {
 
 	public void setManager(Manager manager) {
 		this.manager = manager;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Customer [customerid=" + customerid + ", loanapplication=" + loanapplication + ", firstname="
+				+ firstname + ", lastname=" + lastname + ", mobileno=" + mobileno + ", email=" + email + ", password="
+				+ password + ", address=" + address + ", birthdate=" + birthdate + ", gender=" + gender + "]";
 	}
 	
 	

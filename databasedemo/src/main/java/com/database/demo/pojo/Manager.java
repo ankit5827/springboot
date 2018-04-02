@@ -45,6 +45,10 @@ public class Manager {
 	
 	
 	
+	public Manager(Long managerid) {
+		super();
+		this.managerid = managerid;
+	}
 	public Branch getBranch() {
 		return branch;
 	}
