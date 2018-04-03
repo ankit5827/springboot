@@ -1,4 +1,4 @@
-package com.database.demo.controller;
+package com.applicationbank.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -7,9 +7,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.database.demo.pojo.Customer;
-import com.database.demo.pojo.Manager;
-import com.databse.demo.service.CustomerService;
+import com.applicationbank.pojo.Customer;
+import com.applicationbank.pojo.Manager;
+import com.applicationbank.service.CustomerService;
+import com.applicationbank.service.ManagerService;
 
 
 @Controller
@@ -17,6 +18,7 @@ public class DatabaseDemoController {
 	
     @Autowired
 	private CustomerService customerService;
+    private ManagerService managerService;
 
 	@RequestMapping("/")
 	public String index()
@@ -38,12 +40,33 @@ public class DatabaseDemoController {
 		public String saveCustomer(Model model ,Customer customer)
 		{
 		System.out.println("in save customer controller"+ customer);
-		customer.setManager(new Manager(1));
-		customer.setCustomerid(55);
+		
+		
 		customerService.save(customer);
 		return "success";
 		}
 	
 	
+	
+	
+	@RequestMapping("/managerregister")
+	public String managerRegister (Model model)
+	{
+		model.addAttribute("manager", new Manager());
+		
+		return "managerregister";
+	}
+	
+	@RequestMapping( value="/success", method=RequestMethod.POST)
+	
+	public String saveManager(Model model ,Manager manager)
+	{
+	System.out.println("in save customer controller"+ manager);
+	
+	
+	managerService.save(manager);
+	return "success";
+	}
+
 	
 }

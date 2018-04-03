@@ -1,4 +1,4 @@
-package com.database.demo.pojo;
+package com.applicationbank.pojo;
 
 import java.util.Date;
 import java.util.Set;

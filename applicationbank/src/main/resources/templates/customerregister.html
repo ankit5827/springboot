@@ -15,18 +15,12 @@
     password<input type="text" th:field="*{password}" />
    address <input type="text" th:field="*{address}" />
    birthdate <input type="text" th:field="*{birthdate}" />
-    <!--   gender <select th:field="*{gender}">
-                     <option th:value=" a"> -- </option>
-                     <option th:value="M">Male</option>
-                     <option th:value="F">Female</option>
-                  </select>
-                  
-          -->         
+   
                   
                   
                   
                   <input type="radio" th:field="*{gender}" th:text="male" th:value="Male" />
-                 <!--  <input type="radio" th:field="*{gender}" th:text="female" th:value="female" /> -->
+                  <input type="radio" th:field="*{gender}" th:text="female" th:value="female" />
     
     <input type="submit" value="Submit" />
                  <!--  <a th:href="@{/}">Cancel</a> -->

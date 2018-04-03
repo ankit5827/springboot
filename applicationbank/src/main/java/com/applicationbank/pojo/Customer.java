@@ -1,9 +1,11 @@
-package com.database.demo.pojo;
+package com.applicationbank.pojo;
 
 import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.*;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Customer {
@@ -26,6 +28,8 @@ public class Customer {
 	private String email;
 	private String password;
 	private String address;
+	@Temporal(javax.persistence.TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern="dd.MM.yyyy hh:mm")
 	private Date birthdate;
 	private String gender;
      

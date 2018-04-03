@@ -6,8 +6,8 @@
 </head>
 <body>
     
-    <form th:action="@{/success}" th:object="${customer}" method="POST">
-   <!-- customerid <input type="text" th:field="*{customerid}" /> -->
+    <form th:action="@{/success}" th:object="${manager}" method="POST">
+ 
    first name <input type="text" th:field="*{firstname}" />
    last name <input type="text" th:field="*{lastname}" />
     mobileno  <input type="text" th:field="*{mobileno}" />
@@ -15,21 +15,25 @@
     password<input type="text" th:field="*{password}" />
    address <input type="text" th:field="*{address}" />
    birthdate <input type="text" th:field="*{birthdate}" />
-    <!--   gender <select th:field="*{gender}">
-                     <option th:value=" a"> -- </option>
-                     <option th:value="M">Male</option>
-                     <option th:value="F">Female</option>
-                  </select>
+   Bank  <select th:field="*{bankid}">
+             <option th:each="dropDownItem : ${bank}"
+                             th:value="${Bank.id}"
+                             th:text="${Bank.name}" />
+         </select>
+   Branch
+    <select th:field="*{branchid}">
+             <option th:each="dropDownItem : ${branch}"
+                             th:value="${Branch.id}"
+                             th:text="${Branch.name}" />
+         </select>
                   
-          -->         
                   
                   
                   
-                  <input type="radio" th:field="*{gender}" th:text="male" th:value="Male" />
-                 <!--  <input type="radio" th:field="*{gender}" th:text="female" th:value="female" /> -->
+                 
     
     <input type="submit" value="Submit" />
-                 <!--  <a th:href="@{/}">Cancel</a> -->
+                 
       </form> 
 </body>
 </html>
