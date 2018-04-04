@@ -49,24 +49,6 @@ public class DatabaseDemoController {
 	
 	
 	
-	@RequestMapping("/managerregister")
-	public String managerRegister (Model model)
-	{
-		model.addAttribute("manager", new Manager());
-		
-		return "managerregister";
-	}
 	
-	@RequestMapping( value="/success", method=RequestMethod.POST)
-	
-	public String saveManager(Model model ,Manager manager)
-	{
-	System.out.println("in save customer controller"+ manager);
-	
-	
-	managerService.save(manager);
-	return "success";
-	}
-
 	
 }

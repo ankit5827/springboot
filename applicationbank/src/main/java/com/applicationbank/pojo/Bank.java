@@ -8,10 +8,11 @@ import javax.persistence.*;
 @Table(name="bank")
 public class Bank {
 	@Id
+	@Expose
 	private Long bankid;
 	@OneToMany(mappedBy="bank")
 	private Set<Branch> branch;
-	
+	@Expose
 	private String bankname;
 
 	public Long getBankid() {

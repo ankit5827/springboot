@@ -5,10 +5,13 @@ import java.util.Set;
 
 import javax.persistence.*;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 @Table(name="manager")
 public class Manager {
 	@Id
+	@GeneratedValue
 	private Integer managerid;
 	@OneToMany(mappedBy="manager")
 	private Set <Customer> customer;
@@ -21,6 +24,8 @@ public class Manager {
 	private String email;
 	private String address;
 	private String gender;
+	@Temporal(javax.persistence.TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern="dd.MM.yyyy hh:mm")
 	private Date birthdate;
 	private String password;
 	private Long mobileno;
@@ -58,6 +63,60 @@ public class Manager {
 	public void setBranch(Branch branch) {
 		this.branch = branch;
 	}
+	
+	public String getFirstname() {
+		return firstname;
+	}
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
+	public String getLastname() {
+		return lastname;
+	}
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public String getGender() {
+		return gender;
+	}
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+	public Date getBirthdate() {
+		return birthdate;
+	}
+	public void setBirthdate(Date birthdate) {
+		this.birthdate = birthdate;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public Long getMobileno() {
+		return mobileno;
+	}
+	public void setMobileno(Long mobileno) {
+		this.mobileno = mobileno;
+	}
+	
+	
+	
+	
+	
 	@Override
 	public String toString() {
 		return "Manager [managerid=" + managerid + ", customer=" + customer + ", branch=" + branch + ", firstname="

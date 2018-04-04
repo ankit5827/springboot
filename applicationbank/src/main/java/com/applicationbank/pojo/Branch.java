@@ -8,6 +8,7 @@ import javax.persistence.*;
 @Table(name="branch")
 public class Branch {
 	@Id
+	@Expose
 	private Long Branchid;
 	@ManyToOne
 	@JoinColumn(name="bankid")
@@ -17,7 +18,7 @@ public class Branch {
 	@OneToOne(mappedBy="branch")
 	private Manager manager;
 	
-	
+	@Expose
 	private String branchname;
 	private String branchaddress;
 	private String ifsccode;

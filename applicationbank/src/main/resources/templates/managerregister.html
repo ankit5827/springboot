@@ -6,7 +6,7 @@
 </head>
 <body>
     
-    <form th:action="@{/success}" th:object="${manager}" method="POST">
+    <form th:action="@{/managersuccess}" th:object="${manager}" method="POST">
  
    first name <input type="text" th:field="*{firstname}" />
    last name <input type="text" th:field="*{lastname}" />
@@ -15,7 +15,13 @@
     password<input type="text" th:field="*{password}" />
    address <input type="text" th:field="*{address}" />
    birthdate <input type="text" th:field="*{birthdate}" />
-   Bank  <select th:field="*{bankid}">
+   
+                  
+                  
+                  
+                  <input type="radio" th:field="*{gender}" th:text="male" th:value="Male" />
+                  <input type="radio" th:field="*{gender}" th:text="female" th:value="female" />
+  <!--  Bank  <select th:field="*{bankid}">
              <option th:each="dropDownItem : ${bank}"
                              th:value="${Bank.id}"
                              th:text="${Bank.name}" />
@@ -26,9 +32,15 @@
                              th:value="${Branch.id}"
                              th:text="${Branch.name}" />
          </select>
+                   -->
                   
-                  
-                  
+    Branch     <select 
+                th:field="*{branch}" >
+                <option value="">Select Branch</option>
+                <option th:each="dropDownItem : ${branch}"
+                    th:value="${branch.branchid}"
+                    th:text="${{branch.branchname}"></option>
+            </select>       
                   
                  
     
