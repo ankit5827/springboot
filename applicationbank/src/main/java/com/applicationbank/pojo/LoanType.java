@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Table(name="loantype")
 public class LoanType {
 	@Id
-	private Long loantypeid;
+	private Integer loantypeid;
 	@ManyToOne
 	@JoinColumn(name="branchid")
 	private Branch branch;
@@ -20,10 +20,10 @@ public class LoanType {
 	
 	private String loantypename;
 	private Float intrestrate;
-	public Long getLoantypeid() {
+	public Integer getLoantypeid() {
 		return loantypeid;
 	}
-	public void setLoantypeid(Long loantypeid) {
+	public void setLoantypeid(Integer loantypeid) {
 		this.loantypeid = loantypeid;
 	}
 	public Branch getBranch() {

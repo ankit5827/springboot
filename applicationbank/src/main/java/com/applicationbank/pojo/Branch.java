@@ -4,12 +4,14 @@ import java.util.Set;
 
 import javax.persistence.*;
 
+import com.google.gson.annotations.Expose;
+
 @Entity
 @Table(name="branch")
 public class Branch {
 	@Id
 	@Expose
-	private Long Branchid;
+	private Integer branchid;
 	@ManyToOne
 	@JoinColumn(name="bankid")
 	private Bank bank;
@@ -22,12 +24,14 @@ public class Branch {
 	private String branchname;
 	private String branchaddress;
 	private String ifsccode;
-	public Long getBranchid() {
-		return Branchid;
+	public Integer getBranchid() {
+		return branchid;
 	}
-	public void setBranchid(Long branchid) {
-		Branchid = branchid;
+	
+	public void setBranchid(Integer branchid) {
+		this.branchid = branchid;
 	}
+
 	public Bank getBank() {
 		return bank;
 	}

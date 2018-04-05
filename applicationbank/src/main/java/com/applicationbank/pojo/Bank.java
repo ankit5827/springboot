@@ -4,22 +4,30 @@ import java.util.Set;
 
 import javax.persistence.*;
 
+import com.google.gson.annotations.Expose;
+
 @Entity
 @Table(name="bank")
 public class Bank {
 	@Id
 	@Expose
-	private Long bankid;
+	private Integer bankid;
 	@OneToMany(mappedBy="bank")
 	private Set<Branch> branch;
 	@Expose
 	private String bankname;
 
-	public Long getBankid() {
+	public Bank() {
+		// TODO Auto-generated constructor stub
+	}
+	public Bank(Integer id) {
+		this.bankid = id;
+	}
+	public Integer getBankid() {
 		return bankid;
 	}
 
-	public void setBankid(Long bankid) {
+	public void setBankid(Integer bankid) {
 		this.bankid = bankid;
 	}
 

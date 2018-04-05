@@ -5,7 +5,7 @@
 <title>Login  <!--  customerid  <input type="text" th:field="*{customerid}" /> --></title>
 </head>
 <body>
-<form th:action="@{/customerhome}" th:object="${customer}" method="post" >
+<form th:action="@{/loanapplication}" th:object="${customer}" method="post" >
    customerid  <input type="text" th:field="*{customerid}"/>
    password <input type="text" th:field="*{password}" />
    
