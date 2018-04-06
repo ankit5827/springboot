@@ -4,10 +4,13 @@ import java.util.Set;
 
 import javax.persistence.*;
 
+import com.google.gson.annotations.Expose;
+
 @Entity
 @Table(name="loantype")
 public class LoanType {
 	@Id
+	@Expose
 	private Integer loantypeid;
 	@ManyToOne
 	@JoinColumn(name="branchid")
@@ -17,7 +20,7 @@ public class LoanType {
 	private Set <LoanApplication> loanapplication;
 	
 	
-	
+	@Expose
 	private String loantypename;
 	private Float intrestrate;
 	public Integer getLoantypeid() {

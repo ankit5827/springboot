@@ -24,6 +24,13 @@ public class Branch {
 	private String branchname;
 	private String branchaddress;
 	private String ifsccode;
+	public Branch(int id) {
+		this.branchid=id;
+	}
+	public Branch() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public Integer getBranchid() {
 		return branchid;
 	}

@@ -3,6 +3,8 @@ package com.applicationbank.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,11 +14,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.applicationbank.pojo.Bank;
+import com.applicationbank.pojo.Branch;
 import com.applicationbank.pojo.Customer;
 import com.applicationbank.pojo.LoanApplication;
+import com.applicationbank.pojo.LoanType;
 import com.applicationbank.repository.BankRepository;
 import com.applicationbank.service.BankService;
 import com.applicationbank.service.BranchService;
+import com.applicationbank.service.LoanTypeService;
 import com.applicationbank.service.LoginService;
 import com.google.gson.GsonBuilder;
 @Controller
@@ -28,6 +33,8 @@ public class LoginController {
 	@Autowired
 	private BranchService branchService;
 	
+	@Autowired
+	private LoanTypeService loanTypeService;
 	
 	@RequestMapping("/login")
 	public String customerLogin (Model model)
@@ -47,7 +54,7 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="/loanapplication" , method = RequestMethod.POST )
-	public String byIdAndPassword (Bank bank, Customer customer,Model model)
+	public String byIdAndPassword (Bank bank, Customer customer,Model model,LoanType loantype, HttpSession session)
 	{
 		System.out.println(customer);
 		List<Customer> customers= loginService.findByCustomeridAndPassword(customer.getCustomerid() ,customer.getPassword());
@@ -64,6 +71,8 @@ public class LoginController {
 		model.addAttribute("listAllBank",banks);
 		model.addAttribute("customer", customers);
 		System.out.println("succesfull run bank list");
+		model.addAttribute("loanapplication", new LoanApplication() );
+		session.setAttribute("sessionCustomer",customer);
 			return "loanapplication";	
 			
 	}
@@ -73,14 +82,40 @@ public class LoginController {
 	
 	@RequestMapping(value="loadAllBranch/{id}" , method= RequestMethod.GET)
 	@ResponseBody
-	public String loadState(@PathVariable("id") Integer id)
+	public String loadState(@PathVariable("id") String ids)
 	{
-		System.out.println(id + "id by controller");
-		Bank bank = new Bank(id);
+		System.out.println(ids + "id by controller");
+		 ids = ids.substring(0, ids.length() - 5);
+		 System.out.println(ids + "id by controller");
+		 int id  = Integer.parseInt(ids);
+		 Bank bank = new Bank(id);
 		
 		System.out.println(new GsonBuilder().excludeFieldsWithoutExposeAnnotation().setPrettyPrinting().create().toJson(branchService.findByBank( bank)));
-		System.out.println("succesfull run bank list");
+		System.out.println("succesfull run branch  list");
 		return new GsonBuilder().excludeFieldsWithoutExposeAnnotation().setPrettyPrinting().create().toJson(branchService.findByBank( bank));
+		
+	
+		
+		}
+	
+	
+	@RequestMapping(value="loadAllLoanType/{id}" , method= RequestMethod.GET)
+	@ResponseBody
+	public String loadLoanType (@PathVariable("id") String ids)
+	{
+		System.out.println(ids + "id by controller **********************************************************************");
+		 ids = ids.substring(0, ids.length() - 5);
+		 System.out.println(ids + "id by controller ////////////////////////////////////////////////////////////////////");
+		 int id  = Integer.parseInt(ids);
+		
+		Branch branch=new Branch(id);
+		
+		System.out.println(new GsonBuilder().excludeFieldsWithoutExposeAnnotation().setPrettyPrinting().create().toJson(loanTypeService.findByBranch(branch)));
+		System.out.println("succesfull run branch  list");
+		return new GsonBuilder().excludeFieldsWithoutExposeAnnotation().setPrettyPrinting().create().toJson(loanTypeService.findByBranch(branch));
+		
+	
+		
 		
 	}
 	
@@ -89,20 +124,22 @@ public class LoginController {
 	
 	
 	
-	
-	@RequestMapping("/viewloanapplication")
+	/*@RequestMapping("/viewloanapplication")
 	public String loanApplication (Model model)
 	{
 		model.addAttribute("loanapplication", new LoanApplication() );
 		
 		return "viewloanapplication";
-	}
+	}*/
 	
 	
 	@RequestMapping(value="/viewloanapplication" , method = RequestMethod.POST )
-	public String viewLoanApplications(LoanApplication loanApplication, Model model)
+	public String viewLoanApplications(LoanApplication loanApplication, Model model, HttpSession session)
 	{
-		return "";
+		System.out.println(session.getAttribute("sessionCustomer"));
+		System.out.println(loanApplication.getLoantype());
+		System.out.println(" inside viewloanapplication");System.out.println(loanApplication);
+		return "success";
 	}
 
 

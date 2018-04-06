@@ -8,6 +8,7 @@ import javax.persistence.*;
 @Table(name="loanapplication")
 public class LoanApplication {
 	@Id
+	@GeneratedValue
 	private Long loanapplicationid;
 		
 	
@@ -20,7 +21,7 @@ public class LoanApplication {
 	@JoinColumn(name="loantypeid")
 	private LoanType loantype;
 	
-	
+	 
 	private Double loanamount;
 	private Double annualincome;
 	private Long duration;
@@ -28,6 +29,9 @@ public class LoanApplication {
 	
 	
 	
+	public LoanApplication() {
+		super();
+	}
 	public Long getLoanapplicationid() {
 		return loanapplicationid;
 	}
@@ -63,6 +67,13 @@ public class LoanApplication {
 	}
 	public void setLoantype(LoanType loantype) {
 		this.loantype = loantype;
+	}
+	
+	@Override
+	public String toString() {
+		return "LoanApplication [loanapplicationid=" + loanapplicationid + ", customer=" + customer + ", loantype="
+				+ loantype + ", loanamount=" + loanamount + ", annualincome=" + annualincome + ", duration=" + duration
+				+ "]";
 	}
 		
 	
