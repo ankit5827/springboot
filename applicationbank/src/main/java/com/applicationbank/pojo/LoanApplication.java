@@ -9,7 +9,7 @@ import javax.persistence.*;
 public class LoanApplication {
 	@Id
 	@GeneratedValue
-	private Long loanapplicationid;
+	private Integer loanapplicationid;
 		
 	
 	
@@ -32,10 +32,10 @@ public class LoanApplication {
 	public LoanApplication() {
 		super();
 	}
-	public Long getLoanapplicationid() {
+	public Integer getLoanapplicationid() {
 		return loanapplicationid;
 	}
-	public void setLoanapplicationid(Long loanapplicationid) {
+	public void setLoanapplicationid(Integer loanapplicationid) {
 		this.loanapplicationid = loanapplicationid;
 	}
 	public Customer getCustomer() {
@@ -71,8 +71,7 @@ public class LoanApplication {
 	
 	@Override
 	public String toString() {
-		return "LoanApplication [loanapplicationid=" + loanapplicationid + ", customer=" + customer + ", loantype="
-				+ loantype + ", loanamount=" + loanamount + ", annualincome=" + annualincome + ", duration=" + duration
+		return "LoanApplication [loanapplicationid=" + loanapplicationid + ",  loanamount=" + loanamount + ", annualincome=" + annualincome + ", duration=" + duration
 				+ "]";
 	}
 		

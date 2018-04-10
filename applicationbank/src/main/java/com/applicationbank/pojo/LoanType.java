@@ -23,6 +23,12 @@ public class LoanType {
 	@Expose
 	private String loantypename;
 	private Float intrestrate;
+	public LoanType() {
+		// TODO Auto-generated constructor stub
+	}
+	public LoanType(int id) {
+		this.loantypeid=id;
+	}
 	public Integer getLoantypeid() {
 		return loantypeid;
 	}

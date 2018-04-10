@@ -11,10 +11,8 @@
 			$('#listAllBank').on('change' , function(){
 				
 				var bank = $('#listAllBank option:selected').val();
-				alert(bank);
-				alert(typeof(bank));
+				
 				var bankid=parseInt(bank);
-				alert(typeof(bankid));
 
 				$.ajax({
 					type:'GET' ,
@@ -43,10 +41,7 @@
 $('#listAllBranch').on('change' , function(){
 				
 				var bank = $('#listAllBranch option:selected').val();
-				alert(bank);
-				alert(typeof(bank));
 				var branchid=parseInt(bank);
-				alert(typeof(branchid));
 
 				$.ajax({
 					type:'GET' ,
@@ -69,6 +64,21 @@ $('#listAllBranch').on('change' , function(){
 				})
 				
 			});
+			
+			
+			
+$('#listAllLoanType').on('change' , function(){
+	var loanType = $('#listAllLoanType option:selected').val();
+	$.ajax({
+		type:'GET',
+		contentType: "application/json",
+		url:'/test/' + loanType + '.html' ,
+		success:function(result){
+			$('#listAllLoanType').html(l);
+		}
+	})
+	
+});
 			
 		});
 		 /*]]>*/
@@ -108,7 +118,7 @@ Bank
      <input type="text" th:field="*{loanamount}" />
      
     Loan Duration 
-    <input type="text" th:field="*{duration}" />
+    <input type="text" th:field="*{duration}" placeholder="in months" />
     
     Annual Income
       <input type="text" th:field="*{annualincome}" />

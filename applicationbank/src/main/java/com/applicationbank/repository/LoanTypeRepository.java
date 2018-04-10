@@ -20,4 +20,6 @@ public interface LoanTypeRepository extends CrudRepository<LoanType, Integer>   
 	
 	List<LoanType> findByBranch(Branch branch);
 	
+	
+	
 }

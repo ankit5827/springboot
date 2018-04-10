@@ -21,6 +21,7 @@ import com.applicationbank.pojo.LoanType;
 import com.applicationbank.repository.BankRepository;
 import com.applicationbank.service.BankService;
 import com.applicationbank.service.BranchService;
+import com.applicationbank.service.LoanApplicationService;
 import com.applicationbank.service.LoanTypeService;
 import com.applicationbank.service.LoginService;
 import com.google.gson.GsonBuilder;
@@ -35,7 +36,8 @@ public class LoginController {
 	
 	@Autowired
 	private LoanTypeService loanTypeService;
-	
+	@Autowired
+	private LoanApplicationService loanApplicationService;
 	@RequestMapping("/login")
 	public String customerLogin (Model model)
 	{
@@ -107,6 +109,7 @@ public class LoginController {
 		 ids = ids.substring(0, ids.length() - 5);
 		 System.out.println(ids + "id by controller ////////////////////////////////////////////////////////////////////");
 		 int id  = Integer.parseInt(ids);
+		 
 		
 		Branch branch=new Branch(id);
 		
@@ -119,7 +122,17 @@ public class LoginController {
 		
 	}
 	
-	
+	@RequestMapping(value="test/{id}" , method= RequestMethod.GET)
+	@ResponseBody
+	public void test(@PathVariable("id") String ids , HttpSession session,LoanType loanType)
+	{
+		ids = ids.substring(0, ids.length() - 5);
+		int id  = Integer.parseInt(ids);
+		session.setAttribute("loanType", id);
+		System.out.println(id + "id by controller/*/*/*/*/*/*/*/*//*/*/*/*/*/*/*/*//*/*/*/*/**/***/");
+		
+		
+	}
 	
 	
 	
@@ -137,15 +150,41 @@ public class LoginController {
 	public String viewLoanApplications(LoanApplication loanApplication, Model model, HttpSession session)
 	{
 		System.out.println(session.getAttribute("sessionCustomer"));
-		System.out.println(loanApplication.getLoantype());
-		System.out.println(" inside viewloanapplication");System.out.println(loanApplication);
+		Customer customer =(Customer)session.getAttribute("sessionCustomer");
+		
+		System.out.println(session.getAttribute("loanType"));
+		int id=(int) session.getAttribute("loanType");
+		LoanType loanType=new LoanType(id);
+		loanApplication.setCustomer(customer);
+		loanApplication.setLoantype(loanType);
+		
+		
+		/*System.out.println(loanApplication.getLoantype());*/
+		System.out.println(" inside viewloanapplication");
+		System.out.println(loanApplication);
+		
+		loanApplicationService.save(loanApplication);
+		
+		return "forward:/loanapplicationsbycustomer";
+	}
+	
+	
+	@RequestMapping(value="/loanapplicationsbycustomer")
+	public String byCustomerLoanApplication(Model model, HttpSession session,LoanApplication loanApplication)
+	{
+		Customer customer =(Customer)session.getAttribute("sessionCustomer");
+		List<LoanApplication> loanApplications=loanApplicationService.findByCustomer(customer);
+		
+		
+		System.out.println(loanApplications);
 		return "success";
 	}
 
 
 
 		
-		
+	mysql> select loantypename from loantype where loantypeid in (select loantypeid
+			from loanapplication where customerid =  1);
 	
 
 }

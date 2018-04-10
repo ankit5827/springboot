@@ -15,6 +15,6 @@ import java.lang.String;
 @Repository
 public interface LoanApplicationRepository extends CrudRepository<LoanApplication, Integer>   {
 	
-	
+	List<LoanApplication> findByCustomer(Customer customer);
 	
 }
