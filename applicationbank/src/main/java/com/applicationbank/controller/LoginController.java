@@ -177,14 +177,16 @@ public class LoginController {
 		
 		
 		System.out.println(loanApplications);
-		return "success";
+		model.addAttribute("loanApplications", loanApplications);
+		
+		return "viewloanapplication";
 	}
 
 
 
 		
-	mysql> select loantypename from loantype where loantypeid in (select loantypeid
-			from loanapplication where customerid =  1);
+	/*mysql> select loantypename from loantype where loantypeid in (select loantypeid
+			from loanapplication where customerid =  1);*/
 	
 
 }

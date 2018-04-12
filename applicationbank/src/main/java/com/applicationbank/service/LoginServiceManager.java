@@ -7,24 +7,22 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.applicationbank.pojo.Customer;
+import com.applicationbank.pojo.Manager;
 import com.applicationbank.repository.CustomerRepository;
+import com.applicationbank.repository.ManagerRepository;
 
 @Service
 @Component
 public class LoginServiceManager {
 	@Autowired
-	private CustomerRepository customerRepository;
+	private ManagerRepository managerRepository;
 
-	public List<Customer> findAllByCustomeridAndPassword(Integer customerid, String password) {
+	
+	
+	
+	public List<Manager> findByManageridAndPassword(Integer managerid, String password) {
 		System.out.println("inside service");
-		return customerRepository.findAllByCustomeridAndPassword(customerid, password);
-	}
-	
-	
-	
-	public List<Customer> findByCustomeridAndPassword(Integer customerid, String password) {
-		System.out.println("inside service");
-		return customerRepository.findByCustomeridAndPassword(customerid, password);
+		return managerRepository.findByManageridAndPassword(managerid, password);
 	}
 
 }

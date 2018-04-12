@@ -3,17 +3,79 @@
 <head>
 <meta charset="ISO-8859-1"/>
 <title>Register</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript">0
+	 /*<![CDATA[*/
+		$(document).ready(function(){
+			
+			$('#listAllBank').on('change' , function(){
+				
+				var bank = $('#listAllBank option:selected').val();
+				
+				var bankid=parseInt(bank);
+				alert(bankid);
+
+				$.ajax({
+					type:'GET' ,
+					contentType: "application/json" ,
+					url:'/loadAllBranch/' + bankid +'.html' ,
+					success:function(result){
+						console.log("inside function");
+						var result =  JSON.parse(result);
+						var s ='<option>Select Branch</option>';
+						console.log(result.length);
+						
+						for(var i = 0 ; i< result.length ; i++ )
+							{
+							s +='<option value="'+ result[i].branchid +'">' + result[i].branchname +'</option>'
+							console.log("value of s" + s);
+							}
+						
+						$('#listAllBranch').html(s);
+					}
+				})
+				
+			});
+		
+			
+	 
+	 
+	 
+		
+		$('#listAllBranch').on('change' , function(){
+			var loanbranch = $('#listAllBranch option:selected').val();
+			var loanchbranchid = loanbranch;
+			document.getElementById("loanchbranchid").value = loanchbranchid;
+			alert(loanbranch);
+			$.ajax({
+				//type:'GET',
+				//contentType: "application/json",
+				//url:'/tests/' + loanbranch + '.html' ,
+				success:function(result){
+					console.log(loanbranch);
+					$('#list').html(loanbranch);
+				}
+			})
+			
+		});
+		});
+			 /*]]>*/
+			
+			</script>		
+			
+			
+
 </head>
 <body>
     
-    <form th:action="@{/managersuccess}" th:object="${manager}" method="POST">
+    <form th:action="managerloanapplications" th:object="${manager}" method="POST">
  
-   first name <input type="text" th:field="*{firstname}" />
-   last name <input type="text" th:field="*{lastname}" />
-    mobileno  <input type="text" th:field="*{mobileno}" />
-   email <input type="text" th:field="*{email}" />
-    password<input type="text" th:field="*{password}" />
-   address <input type="text" th:field="*{address}" />
+   first name <input type="text" th:field="*{firstname}" /><br/>
+   last name <input type="text" th:field="*{lastname}" /><br/>
+    mobileno  <input type="text" th:field="*{mobileno}" /><br/>
+   email <input type="text" th:field="*{email}" /><br/>
+    password<input type="text" th:field="*{password}" /><br/>
+   address <input type="text" th:field="*{address}" /><br/>
    birthdate <input type="text" th:field="*{birthdate}" />
    
                   
@@ -21,29 +83,22 @@
                   
                   <input type="radio" th:field="*{gender}" th:text="male" th:value="Male" />
                   <input type="radio" th:field="*{gender}" th:text="female" th:value="female" />
-  <!--  Bank  <select th:field="*{bankid}">
-             <option th:each="dropDownItem : ${bank}"
-                             th:value="${Bank.id}"
-                             th:text="${Bank.name}" />
-         </select>
-   Branch
-    <select th:field="*{branchid}">
-             <option th:each="dropDownItem : ${branch}"
-                             th:value="${Branch.id}"
-                             th:text="${Branch.name}" />
-         </select>
-                   -->
+  <br/>
+  Bank
+	<select id="listAllBank" >
+	<option>Select Bank</option>
+             <option th:each="list : ${listAllBank}" th:value="${list.bankid}" th:text="${list.bankname}"></option>
+
+    </select>
                   
-    Branch     <select 
-                th:field="*{branch}" >
-                <option value="">Select Branch</option>
-                <option th:each="dropDownItem : ${branch}"
-                    th:value="${branch.branchid}"
-                    th:text="${{branch.branchname}"></option>
-            </select>       
-                  
+    <br/>
+    Branch
+    <select id="listAllBranch" >
+
+    </select>  
+     <br/>
                  
-    
+    	  		  <input type="text" name="loanchbranchid" id="loanchbranchid"  placeholder="${loanchbranchid}" value="${loanchbranchid}"/>
     <input type="submit" value="Submit" />
                  
       </form> 

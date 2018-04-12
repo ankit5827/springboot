@@ -4,6 +4,8 @@ import java.util.Set;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.ColumnDefault;
+
 @Entity
 @Table(name="loanapplication")
 public class LoanApplication {
@@ -13,11 +15,11 @@ public class LoanApplication {
 		
 	
 	
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="customerid")
 	private Customer customer;
 	
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="loantypeid")
 	private LoanType loantype;
 	
@@ -25,6 +27,8 @@ public class LoanApplication {
 	private Double loanamount;
 	private Double annualincome;
 	private Long duration;
+	@Column(columnDefinition="varchar(255)  default ' Pending' ")
+	private String status;
 
 	
 	
@@ -69,11 +73,19 @@ public class LoanApplication {
 		this.loantype = loantype;
 	}
 	
+	
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
 	@Override
 	public String toString() {
-		return "LoanApplication [loanapplicationid=" + loanapplicationid + ",  loanamount=" + loanamount + ", annualincome=" + annualincome + ", duration=" + duration
-				+ "]";
+		return "LoanApplication [loanapplicationid=" + loanapplicationid + ", loanamount=" + loanamount + ", annualincome=" + annualincome + ", duration=" + duration
+				+ ", status=" + status + "]";
 	}
+	
 		
 	
 	
