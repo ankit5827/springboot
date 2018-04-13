@@ -3,6 +3,7 @@ package com.applicationbank.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -103,13 +104,13 @@ public class LoginController {
 	
 	@RequestMapping(value="loadAllLoanType/{id}" , method= RequestMethod.GET)
 	@ResponseBody
-	public String loadLoanType (@PathVariable("id") String ids)
+	public String loadLoanType (@PathVariable("id") String ids,HttpSession session)
 	{
 		System.out.println(ids + "id by controller **********************************************************************");
 		 ids = ids.substring(0, ids.length() - 5);
 		 System.out.println(ids + "id by controller ////////////////////////////////////////////////////////////////////");
 		 int id  = Integer.parseInt(ids);
-		 
+		 session.setAttribute("branchid", id);
 		
 		Branch branch=new Branch(id);
 		
@@ -159,6 +160,14 @@ public class LoginController {
 		loanApplication.setLoantype(loanType);
 		
 		
+		
+		System.out.println("for branchid////////////////////////////////////////////");
+		System.out.println(session.getAttribute("branchid"));
+		int id1=(int) session.getAttribute("branchid");
+		System.out.println("/////////////////////////////////////////////"+id1);
+		Branch branch=new Branch(id1);
+		loanApplication.setBranch(branch);
+	
 		/*System.out.println(loanApplication.getLoantype());*/
 		System.out.println(" inside viewloanapplication");
 		System.out.println(loanApplication);

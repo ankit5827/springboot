@@ -22,6 +22,10 @@ public class LoanApplication {
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="loantypeid")
 	private LoanType loantype;
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="branchid")
+	private Branch branch;
+	
 	
 	 
 	private Double loanamount;
@@ -30,10 +34,7 @@ public class LoanApplication {
 	@Column(columnDefinition="varchar(255)  default ' Pending' ")
 	private String status;
 
-	
-	
-	
-	public LoanApplication() {
+	public LoanApplication() { 
 		super();
 	}
 	public Integer getLoanapplicationid() {
@@ -74,6 +75,12 @@ public class LoanApplication {
 	}
 	
 	
+	public Branch getBranch() {
+		return branch;
+	}
+	public void setBranch(Branch branch) {
+		this.branch = branch;
+	}
 	public String getStatus() {
 		return status;
 	}

@@ -20,6 +20,12 @@ public class Branch {
 	@OneToOne(mappedBy="branch")
 	private Manager manager;
 	
+	
+@OneToMany(mappedBy="branch",cascade = CascadeType.ALL)
+	
+	private Set<LoanApplication> loanapplication;
+	
+	
 	@Expose
 	private String branchname;
 	private String branchaddress;
@@ -74,6 +80,11 @@ public class Branch {
 	}
 	public void setManager(Manager manager) {
 		this.manager = manager;
+	}
+	@Override
+	public String toString() {
+		return "Branch [branchid=" + branchid + ", bank=" + bank + ", manager=" + manager + ", branchname=" + branchname
+				+ ", branchaddress=" + branchaddress + ", ifsccode=" + ifsccode + "]";
 	}
 	
 	

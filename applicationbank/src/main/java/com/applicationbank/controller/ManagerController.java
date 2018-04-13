@@ -17,10 +17,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.applicationbank.pojo.Bank;
 import com.applicationbank.pojo.Branch;
+import com.applicationbank.pojo.LoanApplication;
 import com.applicationbank.pojo.LoanType;
 import com.applicationbank.pojo.Manager;
 import com.applicationbank.service.BankService;
 import com.applicationbank.service.BranchService;
+import com.applicationbank.service.LoanApplicationService;
 import com.applicationbank.service.ManagerService;
 import com.google.gson.GsonBuilder;
 
@@ -34,6 +36,10 @@ public class ManagerController {
 		private BankService bankService;
 		@Autowired
 		private BranchService branchService;
+		
+		@Autowired
+		LoanApplicationService loanApplicationService;
+		
 		
 		@RequestMapping("/managerregister")
 		public String managerRegister (Model model , Bank bank , Manager manager)
@@ -51,24 +57,24 @@ public class ManagerController {
 		
 		public String saveManager(Model model ,Manager manager, HttpSession session ,HttpServletRequest request )
 		{
-			
-			
-		System.out.println(request.getParameter("loanchbranchid"));
-		System.out.println("in save manager controller"+ manager);
-		
-		String idd = request.getParameter("loanchbranchid");
-		
-		int id = Integer.parseInt(idd);
-		
-		Branch branch=new Branch(id);
-		
-		manager.setBranch(branch);
-		System.out.println("after manager login");
-		model.addAttribute("manager",new Manager());
-		managerService.save(manager);
-		return "managersuccess";
+			String idd = request.getParameter("loanchbranchid");
+			Branch branch =  new Branch(Integer.parseInt(idd));
+			manager.setBranch(branch);
+			model.addAttribute("manager",new Manager());
+			managerService.save(manager);
+			List<LoanApplication>loanApplications =  loanApplicationService.findByBranchId(branch);
+			System.out.println(loanApplications);
+			model.addAttribute("loanApplications", loanApplications);
+			return "managersuccess";
 		}
 		
+		
+		/*@RequestMapping(value="/loanapplicationsbycustomer")*/
+		
+		
+		
+		
+			
 		public ManagerController() {
 			
 		}

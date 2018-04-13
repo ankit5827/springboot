@@ -13,9 +13,9 @@ public class Manager {
 	@Id
 	@GeneratedValue
 	private Integer managerid;
-	@OneToMany(mappedBy="manager")
+	@OneToMany(mappedBy="manager" , fetch=FetchType.EAGER)
 	private Set <Customer> customer;
-	@OneToOne 
+	@OneToOne(fetch=FetchType.EAGER) 
 	@JoinColumn(name="branchid")
 	private Branch branch;
 	

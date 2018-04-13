@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import com.applicationbank.pojo.Branch;
 import com.applicationbank.pojo.Customer;
 import com.applicationbank.pojo.LoanApplication;
 import com.applicationbank.repository.BankRepository;
@@ -38,7 +39,10 @@ public class LoanApplicationService {
 	}
 
 	
-	
+	public List<LoanApplication> findByBranchId(Branch branch) {
+		System.out.println("inside loan application findByBranchid service");
+		return loanApplicationRepository.findByBranch(branch);
+	}
 	
 	
 	

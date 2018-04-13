@@ -104,7 +104,7 @@ Bank
     <br/>
     Branch
     <select id="listAllBranch" >
-             <option th:each="list : ${s}" th:value="${list.branchid}" th:text="${list.branchname}" ></option>
+             <option th:each="list : ${s}" th:value="${list.branchid}" th:text="${list.branchname}" th:field="*{branchid}" ></option>
 
     </select>  
      <br/>

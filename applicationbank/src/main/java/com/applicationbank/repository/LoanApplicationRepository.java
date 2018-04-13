@@ -12,9 +12,11 @@ import com.applicationbank.pojo.Customer;
 import com.applicationbank.pojo.LoanApplication;
 
 import java.lang.String;
+import com.applicationbank.pojo.Branch;
 @Repository
 public interface LoanApplicationRepository extends CrudRepository<LoanApplication, Integer>   {
 	
 	List<LoanApplication> findByCustomer(Customer customer);
-	
+	List<LoanApplication> findByBranch(Branch branch);
+
 }
